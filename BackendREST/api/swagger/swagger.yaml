@@ -1,0 +1,619 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Hello World App
+# during dev, should point to your local machine
+host: 127.0.0.1:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+  - text/xml
+  - application/pdf
+  - text/html
+  - text/plain
+  - application/octet-stream
+  - application/zip
+  - application/msword
+  - application/vnd.ms-excel
+  - application/vnd.ms-powerpoint
+  - image/gif
+  - image/png
+  - image/jpg
+  - multipart/form-data
+  - application/force-download
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+  - text/xml
+  - application/pdf
+  - text/plain
+  - text/html
+  - application/octet-stream
+  - application/zip
+  - application/msword
+  - application/vnd.ms-excel
+  - application/vnd.ms-powerpoint
+  - image/gif
+  - image/png
+  - image/jpg
+  - application/force-download
+paths:
+  /noviKlijent:
+    x-swagger-router-controller: klijent
+    post:
+      operationId: saveNoviKlijent
+      parameters:
+        - name: data
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /KlijentList:
+    x-swagger-router-controller: klijent
+    get:
+      operationId: KlijentList
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /KlijentList/{id}:
+    x-swagger-router-controller: klijent
+    delete:
+        operationId: deleteKlijent
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          "200":
+            description: Success
+            schema:
+              # a pointer to a definition
+              $ref: "#/definitions/HelloWorldResponse"
+          # responses may fall through to errors
+          default:
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+  /noviProjekt:
+    x-swagger-router-controller: projekt
+    post:
+      operationId: saveNoviProjekt
+      parameters:
+        - name: data
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /noviKlijent/{id}:
+    x-swagger-router-controller: klijent
+    get:
+      operationId : getKlijent
+      parameters:
+          - name: id
+            in: path
+            required: true
+            type: number
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      operationId: updateKlijent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+        - name: data
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /noviProjekt/{id}:
+    x-swagger-router-controller: projekt
+    get:
+      operationId : getProjekt
+      parameters:
+          - name: id
+            in: path
+            required: true
+            type: number
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      operationId: updateProjekt
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+        - name: data
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /ProjektList:
+    x-swagger-router-controller: projekt
+    post:
+      operationId: noviProjekt
+      parameters:
+        - name: model
+          in: body
+          schema: 
+            type: object
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/HelloWorldResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      operationId: ProjektList
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /ProjektList/{id}:
+    x-swagger-router-controller: projekt
+    put:
+      operationId: uploadProject
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: docname
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+        operationId: deleteProjekt
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          "200":
+            description: Success
+            schema:
+              # a pointer to a definition
+              $ref: "#/definitions/HelloWorldResponse"
+          # responses may fall through to errors
+          default:
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+  /addNote/{id}:
+    x-swagger-router-controller: note
+    post:
+      operationId: addNote
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+        - name: data
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /KlijentBiljeske:
+    x-swagger-router-controller: note
+    get:
+      operationId: KlijentBiljeske
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /KlijentBiljeske/{id}:
+    x-swagger-router-controller: note
+    delete:
+        operationId: deleteNote
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          "200":
+            description: Success
+            schema:
+              # a pointer to a definition
+              $ref: "#/definitions/HelloWorldResponse"
+          # responses may fall through to errors
+          default:
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+  /clientCombo:
+    x-swagger-router-controller: combo
+    get:
+      operationId: clientCombo
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /sendMail:
+    x-swagger-router-controller: klijent
+    post:
+      operationId: sendMail
+      parameters:
+        - name: data
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /documentList:
+    x-swagger-router-controller: dokumenti
+    post:
+      operationId: noviDokumenet
+      parameters:
+        - name: id
+          in: query
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/HelloWorldResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      operationId: KlijentDokumentiList
+      parameters:
+        - name: id
+          in: query
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /documentList/{id}:
+    x-swagger-router-controller: dokumenti
+    put:
+      operationId: izmjenaDokumenta
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: docname
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+        operationId: deleteDoc
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          "200":
+            description: Success
+            schema:
+              # a pointer to a definition
+              $ref: "#/definitions/HelloWorldResponse"
+          # responses may fall through to errors
+          default:
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+  /uploadDoc:
+    x-swagger-router-controller: dokumenti
+    post:
+      operationId: upload
+      parameters:
+        - name: file
+          in: formData
+          required: true
+          type: file
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/HelloWorldResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /downDoc/{filename}:
+    x-swagger-router-controller: dokumenti
+    get:
+      operationId: download
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /documentLista:
+    x-swagger-router-controller: Projektdokumenti
+    post:
+      operationId: noviDokument
+      parameters:
+        - name: id
+          in: query
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/HelloWorldResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      operationId: ProjektDokumentiList
+      parameters:
+        - name: id
+          in: query
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /documentLista/{id}:
+    x-swagger-router-controller: Projektdokumenti
+    put:
+      operationId: izmjenaDokument
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: docname
+          in: body
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+        operationId: deleteDokument
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          "200":
+            description: Success
+            schema:
+              # a pointer to a definition
+              $ref: "#/definitions/HelloWorldResponse"
+          # responses may fall through to errors
+          default:
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+  /ProjektuploadDoc:
+    x-swagger-router-controller: Projektdokumenti
+    post:
+      operationId: uploadDoc
+      parameters:
+        - name: file
+          in: formData
+          required: true
+          type: file
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/HelloWorldResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /Projektdowndoc/{filename}:
+    x-swagger-router-controller: Projektdokumenti
+    get:
+      operationId: downloadDoc
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+
+  HelloWorldResponse:
+    type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
